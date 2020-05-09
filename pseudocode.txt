@@ -1,4 +1,4 @@
-ACCOUNT CREATION AND CHECKING
+COUNT CREATION AND CHECKING
 -----------------------------
 Register User (regusr)
 	if( user is already registered )
@@ -6,10 +6,11 @@ Register User (regusr)
 	else
 		regusr process
 
+// Helper Function to reguser
 Register User Process (regpro)
 	add username to table
 	add zipcode to table - is  associated with user
-
+	ask for password (add to hash table of passwords)
  
 Unregister User (unregusr)
 	 if (user is not registered) 
@@ -17,9 +18,21 @@ Unregister User (unregusr)
   	else
      		unregister the user (remove all their info)
 
+Nominate User (nomusr)
+	if ( current user has not nominated chosen user )
+		Nominations++
+	else
+		error "you already nominate this user"
+
 TABLE userInfo {
 	name username;
 	int zipcode;
+	int nominations;
+	// Returns user readable username from user primary key
 	auto primary_key() const { return username.value  }
 }
 
+TABLE userPasswords {
+	name username;
+	string password hash
+}
