@@ -1,0 +1,25 @@
+ACCOUNT CREATION AND CHECKING
+-----------------------------
+Register User (regusr)
+	if( user is already registered )
+		error "you're already registered"
+	else
+		regusr process
+
+Register User Process (regpro)
+	add username to table
+	add zipcode to table - is  associated with user
+
+ 
+Unregister User (unregusr)
+	 if (user is not registered) 
+    		 error "you're not registered"
+  	else
+     		unregister the user (remove all their info)
+
+TABLE userInfo {
+	name username;
+	int zipcode;
+	auto primary_key() const { return username.value  }
+}
+
