@@ -1,16 +1,10 @@
-COUNT CREATION AND CHECKING
+ALERTCHAIN Smart Contract
 -----------------------------
 Register User (regusr)
 	if( user is already registered )
 		error "you're already registered"
 	else
 		regusr process
-
-// Helper Function to reguser
-Register User Process (regpro)
-	add username to table
-	add zipcode to table - is  associated with user
-	ask for password (add to hash table of passwords)
  
 Unregister User (unregusr)
 	 if (user is not registered) 
@@ -26,13 +20,37 @@ Nominate User (nomusr)
 
 TABLE userInfo {
 	name username;
-	int zipcode;
+	string county;
 	int nominations;
 	// Returns user readable username from user primary key
-	auto primary_key() const { return username.value  }
 }
 
 TABLE userPasswords {
 	name username;
 	string password hash
 }
+
+// Will be auto generated once one person from that county registers
+TABLE countyInfo {
+	string county
+	int confirmed_cases
+	int recovered
+	int deaths
+}
+
+// Helper Function to reguser
+Register User Process (regpro)
+        add username to table
+        ask for password (add to hash table of passwords)
+
+	if (county has a table)
+		enroll user in that county's table
+	else
+		generate table for county and enroll user
+
+Generate Table (gentable)
+	// Pull stats from Google and store in following variables 
+	int confirmed_cases
+	int recoverd
+	int deaths
+	return county table
