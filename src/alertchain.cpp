@@ -9,7 +9,7 @@ class [[eosio::contract("alertchain")]] alertchain : public eosio::contract
 	contract(receiver, code, ds) {}
 		
 		[[eosio::action]]
-		void upsert(name user, std::string first_name, std::string last_name, std::string county) {
+		void upsert(name user, std::string first_name, std::string last_name, int zipcode) {
 			require_auth( user );
 			address_index addresses(get_self(), get_first_receiver().value);
 			auto iterator = addresses.find(user.value);
@@ -20,7 +20,7 @@ class [[eosio::contract("alertchain")]] alertchain : public eosio::contract
 					row.key = user;
 					row.first_name = first_name;
 					row.last_name = last_name;
-					row.county = county;
+					row.zipcode = zipcode;
                     row.nominations = 0;
 				});
 			}
@@ -31,7 +31,7 @@ class [[eosio::contract("alertchain")]] alertchain : public eosio::contract
 					row.key = user;
 					row.first_name = first_name;
 					row.last_name = last_name;
-					row.county = county;
+					row.zipcode = zipcode;
 				});
 			}
 		}
@@ -50,7 +50,7 @@ class [[eosio::contract("alertchain")]] alertchain : public eosio::contract
 			name key;
 			std::string first_name;
 			std::string last_name;
-			std::string county;
+			int zipcode;
             int nominations;
 
 			uint64_t primary_key() const { return key.value;}

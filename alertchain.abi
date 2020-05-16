@@ -30,8 +30,8 @@
                     "type": "string"
                 },
                 {
-                    "name": "county",
-                    "type": "string"
+                    "name": "zipcode",
+                    "type": "int32"
                 },
                 {
                     "name": "nominations",
@@ -56,8 +56,8 @@
                     "type": "string"
                 },
                 {
-                    "name": "county",
-                    "type": "string"
+                    "name": "zipcode",
+                    "type": "int32"
                 }
             ]
         }
