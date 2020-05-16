@@ -14,8 +14,8 @@ CONTRACT alertchain_book : public contract {
   private:
 
     alertchain_book(name receiver, name code, datastream<const char*> ds);
-      contract(receiver, code, ds),
-      mailinglist_table(receiver, receiver.value) {}
+      CONTRACT contract(receiver, code, ds),
+      TABLE people_table(receiver, receiver.value) {}
 
     TABLE person {
       name key;
@@ -26,7 +26,7 @@ CONTRACT alertchain_book : public contract {
 
 			uint64_t primary_key() const { return key.value;}
   }
-    typedef eosio::multi_index<name("mailinglist"), mailinglist> mailinglist_table;
+    typedef eosio::multi_index<name("people"), person> address_index;
 
-    mailinglist_table _mailinglist;
+    people_table _people;
 };

@@ -1,12 +1,12 @@
-#include <eosio/eosio/hpp>
+#include <eosio/eosio.hpp>
 
 using namespace eosio;
 
-class [[eosio::contract("alertchain_book")]] alertchain_book : public eosio::contract
+class [[eosio::contract("alertchain")]] alertchain : public eosio::contract
 {
 	public:
-		alertchain_book(name receiver, name code, datastream<const char*> ds):
-	contract(reciever, code, ds) {}
+		alertchain(name receiver, name code, datastream<const char*> ds):
+	contract(receiver, code, ds) {}
 		
 		[[eosio::action]]
 		void upsert(name user, std::string first_name, std::string last_name, std::string county) {
@@ -14,7 +14,7 @@ class [[eosio::contract("alertchain_book")]] alertchain_book : public eosio::con
 			address_index addresses(get_self(), get_first_receiver().value);
 			auto iterator = addresses.find(user.value);
 			// if user does not exist, add to table
-            if( iterator == address.end() )
+            if( iterator == addresses.end() )
 			{
 				addresses.emplace(user, [&]( auto& row ) {
 					row.key = user;
@@ -51,7 +51,7 @@ class [[eosio::contract("alertchain_book")]] alertchain_book : public eosio::con
 			std::string first_name;
 			std::string last_name;
 			std::string county;
-            std::int nominations;
+            int nominations;
 
 			uint64_t primary_key() const { return key.value;}
 		};
