@@ -1,6 +1,8 @@
 #include <eosio/eosio.hpp>
 
 using namespace eosio;
+using namespace std;
+
 
 class [[eosio::contract("alertchain")]] alertchain : public eosio::contract
 {
@@ -43,6 +45,13 @@ class [[eosio::contract("alertchain")]] alertchain : public eosio::contract
 			auto iterator = addresses.find(user.value);
 			check(iterator != addresses.end(), "User does note exist");
 			addresses.erase(iterator);
+		}
+
+		[[eosio::action]]
+		string alert(name user, string testdata){
+			require_auth(user);
+			printf("%s\n",testdata.c_str());
+			return testdata;
 		}
 
 	private:
